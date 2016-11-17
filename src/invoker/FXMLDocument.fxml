@@ -10,69 +10,22 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml">
- <top>
-  <MenuBar>
-   <menus>
-    <Menu text="File">
-     <items>
-      <MenuItem text="New"></MenuItem>
-      <MenuItem text="Open..."></MenuItem>
-      <MenuItem text="Save"></MenuItem>
-      <MenuItem text="Save As..."></MenuItem>
-      <SeparatorMenuItem></SeparatorMenuItem>
-      <MenuItem text="Page Setup..."></MenuItem>
-      <MenuItem text="Print"></MenuItem>
-      <SeparatorMenuItem></SeparatorMenuItem>
-      <MenuItem text="Exit"></MenuItem>
-     </items>
-    </Menu>
-    <Menu text="Edit">
-     <items>
-      <MenuItem text="Undo"></MenuItem>
-      <SeparatorMenuItem></SeparatorMenuItem>
-      <MenuItem text="Cut"></MenuItem>
-      <MenuItem text="Copy"></MenuItem>
-      <MenuItem text="Paste"></MenuItem>
-      <MenuItem text="Delete"></MenuItem>
-      <SeparatorMenuItem></SeparatorMenuItem>
-      <MenuItem text="Find..."></MenuItem>
-      <MenuItem text="Find Next"></MenuItem>
-      <MenuItem text="Replace..."></MenuItem>
-      <MenuItem text="Go To..."></MenuItem>
-      <SeparatorMenuItem></SeparatorMenuItem>
-      <MenuItem text="Select All"></MenuItem>
-      <MenuItem text="Time/Date"></MenuItem>
-     </items>
-    </Menu>
-    <Menu text="Format">
-     <items>
-      <MenuItem text="Word Wrap"></MenuItem>
-      <MenuItem text="Font..."></MenuItem>
-     </items>
-    </Menu>
-    <Menu text="View">
-     <items>
-      <MenuItem text="Status Bar"></MenuItem>
-     </items>
-    </Menu>
-    <Menu text="Help">
-     <items>
-      <MenuItem text="View Help"></MenuItem>
-      <SeparatorMenuItem></SeparatorMenuItem>
-      <MenuItem text="About Notepad"></MenuItem>
-     </items>
-    </Menu>
-   </menus>
-  </MenuBar>
- </top>
- <center>
-  <TextArea>
-  </TextArea>
- </center>
-</BorderPane>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="invoker.FXMLDocumentController">
+
+
+
+  <Button layoutX="10" layoutY="90" text="Couper" onAction="#HandleCouperButtonAction" fx:id="button1" ></Button>
+  <Button layoutX="10" layoutY="120" text="Coller" onAction="#HandleCollerButtonAction" fx:id="button2"/>
+  <Button layoutX="10" layoutY="150" text="Copier" onAction="#HandleCopierButtonAction" fx:id="button3"/>
+  <Button layoutX="10" layoutY="180" text="Inserer texte" onAction="#HandleInsererButtonAction" fx:id="button4"/>
+  <Button layoutX="10" layoutY="210" text="Supprimer texte " onAction="#HandleSupprimerButtonAction" fx:id="button5"/>
+  <TextArea  layoutX="200" layoutY="90"></TextArea>
+
+
+</AnchorPane>
 
 
 

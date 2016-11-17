@@ -12,8 +12,7 @@ import java.util.HashSet;
 
 public class Selection
 {
-	
-	Scanner scanner = new Scanner(System.in);
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->

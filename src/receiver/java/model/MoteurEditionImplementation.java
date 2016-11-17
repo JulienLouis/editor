@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.HashSet;
 import receiver.java.model.*;
 
-
 /**
  * <!-- begin-user-doc -->
  * <!--  end-user-doc  -->
@@ -33,7 +32,7 @@ public class MoteurEditionImplementation implements MoteurImplementation
 		int d = select.getDebut();
 		int f = select.getFin();
 		//select.defBornes(d,f);		//Permet de connaitre les bornes de la selection
-		if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionné
+		if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionnï¿½
 			pp.contenu_presse_papier = "";
 		}
 		for (int i = d; i < f; i++){		//ajoute le contenu de la selection dans le presse papier
@@ -52,7 +51,7 @@ public class MoteurEditionImplementation implements MoteurImplementation
 	public void copier(){
 		int d = select.getDebut();
 		int f = select.getFin();
-		if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionné
+		if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionnï¿½
 			pp.contenu_presse_papier = "";
 		}
 		for (int i = d; i < f; i++){		//ajoute le contenu de la selection dans le presse papier
@@ -128,7 +127,7 @@ public class MoteurEditionImplementation implements MoteurImplementation
 	
 	public void supprimer_texte(){
 		int d = select.getDebut();
-		int f = select.getFin();//Determine la selection supprimée
+		int f = select.getFin();//Determine la selection supprimï¿½e
 		buf.zone_texte.delete(d, f);
 	}
 

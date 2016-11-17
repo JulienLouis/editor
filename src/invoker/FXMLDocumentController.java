@@ -11,20 +11,82 @@ import java.util.ResourceBundle;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
+import command.*;
+
 
 /**
  *
  * @author 17012776
  */
 public class FXMLDocumentController implements Initializable {
+
+    client client = new client();
+    public command couper;
     
     @FXML
     private Label label;
-    
+    @FXML
+    private Button button1;
+    @FXML
+    private Button button2;
+    @FXML
+    private Button button3;
+    @FXML
+    private Button button4;
+    @FXML
+    private Button button5;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
+    @FXML
+    public void HandleInsererButtonAction(ActionEvent event){
+        button4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                client.list.get("inserer_texte");
+            }
+        });
+    }
+    @FXML
+    public void HandleCollerButtonAction(ActionEvent event){
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                client.list.get("coller");
+            }
+        });
+    }
+    @FXML
+    public void HandleCopierButtonAction(ActionEvent event){
+        button3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                client.list.get("copier");
+            }
+        });
+    }
+    @FXML
+    public void HandleCouperButtonAction(ActionEvent event){
+        button1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                client.list.get("couper");
+            }
+        });
+    }
+
+    @FXML
+    public void HandleSupprimerButtonAction(ActionEvent event){
+        button5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                client.list.get("supprimer");
+            }
+        });
+    }
     
 }

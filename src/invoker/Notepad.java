@@ -8,6 +8,7 @@ package invoker;
 
 import javafx.event.*;
 import javafx.fxml.*;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.*;
@@ -22,7 +23,7 @@ public class Notepad extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,800,600);
         
         stage.setScene(scene);
         stage.show();
