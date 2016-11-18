@@ -12,6 +12,9 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import command.*;
+import receiver.java.model.MoteurEditionImplementation;
+
+import javax.swing.*;
 
 
 /**
@@ -20,9 +23,11 @@ import command.*;
  */
 public class FXMLDocumentController implements Initializable {
 
-    client client = new client();
-    public command couper;
-    
+    /*client client = new client();
+    public command coller;
+
+
+
     @FXML
     private Label label;
     @FXML
@@ -35,13 +40,15 @@ public class FXMLDocumentController implements Initializable {
     private Button button4;
     @FXML
     private Button button5;
-
-
+    @FXML
+    private TextArea textArea;
+*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
 
+      //  coller = client.list.get("coller");
+    }
+/*
     @FXML
     public void HandleInsererButtonAction(ActionEvent event){
         button4.setOnAction(new EventHandler<ActionEvent>() {
@@ -56,7 +63,8 @@ public class FXMLDocumentController implements Initializable {
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                client.list.get("coller");
+                JOptionPane.showMessageDialog(null,"alert");
+                coller.execute();
             }
         });
     }
@@ -88,5 +96,6 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }
+*/
     
 }

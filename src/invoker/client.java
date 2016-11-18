@@ -11,7 +11,7 @@ public class client {
 
 
     MoteurEditionImplementation mei = new MoteurEditionImplementation();
-    Notepad note = new Notepad();
+    //Notepad note = new Notepad();
     HashMap<String, command> list = new HashMap<String, command>();
 
     public client() {
