@@ -18,8 +18,10 @@ public class notepad extends JFrame {   
   private JTextArea textArea;    
   /**     * Our application's buttons     
   * See {@api http://docs.oracle.com/javase/7/docs/api/javax/swing/JButton.html}     */    
-  private JButton copierButton, collerButton, supprimerButton;    /**     * default constructor     */    
-  public notepad() {        fileNameTextField = new JTextField();        
+  private JButton copierButton, collerButton, supprimerButton;    
+  /**     * default constructor     */    
+  public notepad() {        
+                    fileNameTextField = new JTextField();        
                     textArea = new JTextArea();        /**         
                     * Create a panel for the buttons to reside.         
                     * The default layout for containers is FlowLayout         *         
@@ -73,7 +75,8 @@ public class notepad extends JFrame {   
       }        } catch (IOException ioe) {           
       ioe.printStackTrace();            
       System.out.println("File not found");        
-    } finally {            
+    } 
+    finally {            
       if (inFile != null) {                
         inFile.close();            
       }        
@@ -88,7 +91,8 @@ public class notepad extends JFrame {   
       // file writer            
       outFile = new PrintWriter(new FileWriter(fileName));           
       outFile.print(textArea.getText());        
-    } catch (IOException ioe) {           
+    } 
+    catch (IOException ioe) {           
       ioe.printStackTrace();            
       System.out.println("File not found");        
     } 
@@ -104,13 +108,40 @@ public class notepad extends JFrame {   
   * the behavior of the actionPerformed() method.     *     
   * See {@api http://docs.oracle.com/javase/7/docs/api/java/awt/event/ActionListener.html}     
   *     * More info on action listeners {@api http://docs.oracle.com/javase/tutorial/uiswing/events/actionlistener.html     
-  */    class NotepadButtonListener implements ActionListener {        
+  */    
+  class NotepadButtonListener implements ActionListener {        
     /**         * This needs to be defined since this class implements the ActionListener interface         
     * @param e the event         */        
-    @Override        public void actionPerformed(ActionEvent e) {            
+    @Override        
+    public void actionPerformed(ActionEvent e) {            
       JButton sourceButton = (JButton) e.getSource();           
       // Figure out which button was pressed                        
       if (sourceButton.equals(collerButton)) {                
         System.out.println("Load button pressed");               
-        readFile(getFileName());            } else if (sourceButton.equals(copierButton)) {                
-        System.out.println("Save button pressed");                writeFile(getFileName());            } else if (sourceButton.equals(supprimerButton)) {                System.out.println("Clear button pressed");                // clear the text area                textArea.setText("");            } else {                System.out.println("Unknown button pressed");            }        }    }    /**     * The application's entry point     * @param args     */    public static void main(String[] args) {        // Create the notepad instance        new notepad();    }}
+        readFile(getFileName());            
+      } 
+      else if (sourceButton.equals(copierButton)) {                
+        System.out.println("Save button pressed");                
+        writeFile(getFileName());            
+      } else if (sourceButton.equals(supprimerButton)) 
+      {                
+        System.out.println("Clear button pressed");               
+        // clear the text area                
+        textArea.setText("");            
+      } else {               
+        System.out.println("Unknown button pressed");           
+      }      
+    }   
+  }    
+  /**     
+  * The application's entry point    
+  * @param args     
+  */    
+  public static void main(String[] args) {       
+    // Create the notepad instance        
+    new notepad();    
+  
+  }
+}
+
+    
