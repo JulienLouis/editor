@@ -1,4 +1,6 @@
+package invoker;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,141 +9,101 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-public class notepad extends JFrame {    
-  /**     * Holds the name of the file     
-  * See {@api http://docs.oracle.com/javase/7/docs/api/javax/swing/JTextField.html}     
-  */    
-  private JTextField fileNameTextField;    
-  /**     * Holds the text of the file     
-  * See {@api http://docs.oracle.com/javase/7/docs/api/javax/swing/JTextArea.html}     
-  */    
-  private JTextArea textArea;    
-  /**     * Our application's buttons     
-  * See {@api http://docs.oracle.com/javase/7/docs/api/javax/swing/JButton.html}     */    
-  private JButton copierButton, collerButton, supprimerButton;    
-  /**     * default constructor     */    
-  public notepad() {        
-                    fileNameTextField = new JTextField();        
-                    textArea = new JTextArea();        /**         
-                    * Create a panel for the buttons to reside.         
-                    * The default layout for containers is FlowLayout         *         
-                    * See {@link http://docs.oracle.com/javase/7/docs/api/java/awt/FlowLayout.html}         */        
-                    JPanel buttonPanel = new JPanel();        
-                    copierButton = new JButton("Copier");        
-                    collerButton = new JButton("Coller");        
-                    supprimerButton = new JButton("Suprimmer");        
-                    // Instantiate an action listener to listen for button click events        
-                    NotepadButtonListener buttonListener = new NotepadButtonListener();        
-                    // attach our action listener to the buttons        
-                    copierButton.addActionListener(buttonListener);        
-                    collerButton.addActionListener(buttonListener);        
-                    supprimerButton.addActionListener(buttonListener);        
-                    buttonPanel.add(copierButton);        
-                    buttonPanel.add(collerButton);        
-                    buttonPanel.add(supprimerButton);        
-                    // set the layout of the JFrame        
-                    this.setLayout(new BorderLayout());        
-                    /**         
-                    * Add the elements to the panel.         
-                    * BorderLayouts have 5 positions that you can add Objects:         
-                    * NORTH, SOUTH, EAST, WEST, and CENTER         *         
-                    * See {@api http://docs.oracle.com/javase/7/docs/api/java/awt/BorderLayout.html}         */       
-                    add(fileNameTextField, BorderLayout.NORTH);        
-                    add(textArea, BorderLayout.CENTER);        
-                    add(buttonPanel, BorderLayout.SOUTH);        
-                    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        
-                    // show the frame        
-                    setPreferredSize(new Dimension(400, 300));        
-                    pack();        
-                    setVisible(true);   
-                   }    
-  /**     *     * @return the name of the file     */    
-  private String getFileName() {        
-    return fileNameTextField.getText();    
-  }    
-  /**     * Read from the specified file     
-  * @param fileName the name of the file to read from     
-  */    
-  private void readFile(String fileName) {        
-    Scanner inFile = null;        
-    try {            
-      // file reader            
-      inFile = new Scanner(new FileReader(fileName));            
-      // clear the text area            
-      textArea.setText("");            
-      // copy file            
-      while (inFile.hasNextLine()) {                
-        textArea.append(inFile.nextLine());            
-      }        } catch (IOException ioe) {           
-      ioe.printStackTrace();            
-      System.out.println("File not found");        
-    } 
-    finally {            
-      if (inFile != null) {                
-        inFile.close();            
-      }        
-    }    
-  }    
-  /**     
-  * Write to the specified file    
-  * @param fileName the name of the file to write to     */    
-  private void writeFile(String fileName) {        
-    PrintWriter outFile = null;        
-    try {           
-      // file writer            
-      outFile = new PrintWriter(new FileWriter(fileName));           
-      outFile.print(textArea.getText());        
-    } 
-    catch (IOException ioe) {           
-      ioe.printStackTrace();            
-      System.out.println("File not found");        
-    } 
-    finally {           
-      if (outFile != null) {                
-        outFile.close();            
-      }        
-    }    
-  }    
-  /**     
-  * The action listener for our Notepad application    
-  * Action listeners must implement the ActionListener interface and define    
-  * the behavior of the actionPerformed() method.     *     
-  * See {@api http://docs.oracle.com/javase/7/docs/api/java/awt/event/ActionListener.html}     
-  *     * More info on action listeners {@api http://docs.oracle.com/javase/tutorial/uiswing/events/actionlistener.html     
-  */    
-  class NotepadButtonListener implements ActionListener {        
-    /**         * This needs to be defined since this class implements the ActionListener interface         
-    * @param e the event         */        
-    @Override        
-    public void actionPerformed(ActionEvent e) {            
-      JButton sourceButton = (JButton) e.getSource();           
-      // Figure out which button was pressed                        
-      if (sourceButton.equals(collerButton)) {                
-        System.out.println("Load button pressed");               
-        readFile(getFileName());            
-      } 
-      else if (sourceButton.equals(copierButton)) {                
-        System.out.println("Save button pressed");                
-        writeFile(getFileName());            
-      } else if (sourceButton.equals(supprimerButton)) 
-      {                
-        System.out.println("Clear button pressed");               
-        // clear the text area                
-        textArea.setText("");            
-      } else {               
-        System.out.println("Unknown button pressed");           
-      }      
-    }   
-  }    
-  /**     
-  * The application's entry point    
-  * @param args     
-  */    
-  public static void main(String[] args) {       
-    // Create the notepad instance        
-    new notepad();    
-  
-  }
-}
 
+import receiver.java.model.MoteurEditionImplementation;
+import command.*;
+import client.Editeur;
+
+public class notepad extends JFrame implements Observer{   
+	
+	private Editeur e;
+	
+	//command
+	private command copierC;
+	private command couperC;
+	private command collerC;
+	private command selectionC;
+	private command insererC;
+	private command supprimerC;
+	
+	//swing interface
+	private JButton copier;
+	private JButton couper;
+	private JButton coller;
+	private JTextArea textArea;
+	
+  public notepad(Editeur editeur) {
+	  
+	  	e = editeur;
+	  
+	  	this.setSize(650, 650);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Editeur de texte");
+
+		// Creation du JPanel principal
+		JPanel mainPanel = new JPanel();
+		// Creation du BorderLayout
+		mainPanel.setLayout(new BorderLayout());
+		// Ajout du JPanel a la JFrame
+		this.add(mainPanel);
+
+		// Initialisation des boutons
+		copier = new JButton("Copier");
+		couper = new JButton("Couper");
+		coller = new JButton("Coller");
+
+		// Desactivation boutons
+		coller.setEnabled(false);
+		
+		JPanel upperPanel = new JPanel();
+		upperPanel.add(copier);
+		upperPanel.add(couper);
+		upperPanel.add(coller);
+		mainPanel.add(upperPanel, BorderLayout.NORTH);
+
+		// Creation du JTextArea
+		textArea = new JTextArea();
+		Font f = new Font("Times New Roman", Font.PLAIN, 18);
+		textArea.setFont(f);
+		mainPanel.add(textArea, BorderLayout.CENTER);
+		
+		//ajout des listener
+		commandButton cb = new commandButton();
+		copier.addActionListener(cb);
+		coller.addActionListener(cb);
+		couper.addActionListener(cb);
+
+		this.setVisible(true);
+	  
+  }
+  
+  private class commandButton implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == copier) {
+				coller.setEnabled(true);
+				copierC.execute();
+			} else if (e.getSource() == couper) {
+				couperC.execute();
+				coller.setEnabled(true);
+			} else if (e.getSource() == coller)
+				collerC.execute();
+		}
+  }
+  
     
+	  
+  public void update(String contenu) {
+		textArea.setText(contenu);
+  }
+  
+	public static void main(String[] args) {
+		Editeur e = new Editeur();
+		EventQueue.invokeLater(new Runnable() {
+            public void run() {
+            	notepad note = new notepad(e);
+                note.setVisible(true);
+            }
+        });
+	}
+}
