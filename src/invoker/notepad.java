@@ -1,13 +1,15 @@
 package invoker;
 import javax.swing.*;
-
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import receiver.java.model.MoteurEditionImplementation;
 import command.*;
 import client.Editeur;
+
 
 public class notepad extends JFrame implements Observer{   
 	
@@ -62,6 +64,8 @@ public class notepad extends JFrame implements Observer{
 		Font f = new Font("Times New Roman", Font.PLAIN, 18);
 		textArea.setFont(f);
 		mainPanel.add(textArea, BorderLayout.CENTER);
+	  	textArea.getDocument().addDocumentListener(new MyDocumentListener());
+	        textArea.getDocument().putProperty("name", "Text Area");
 		
 		//ajout des listener
 		commandButton cb = new commandButton();
@@ -73,6 +77,37 @@ public class notepad extends JFrame implements Observer{
 	  
   }
   
+  private class MyDocumentListener implements DocumentListener {
+      final String newline = "\n";
+
+      public void insertUpdate(DocumentEvent e) {
+          updateLog(e, "inserted into");
+      }
+      public void removeUpdate(DocumentEvent e) {
+          updateLog(e, "removed from");
+      }
+      public void changedUpdate(DocumentEvent e) {
+          //Plain text components don't fire these events.
+      }
+
+      public void updateLog(DocumentEvent e, String action) {
+          Document doc = (Document)e.getDocument();
+          int changeLength = e.getLength();
+          
+          System.out.println(
+              changeLength + " character"
+            + ((changeLength == 1) ? " " : "s ")
+            + action + " " + doc.getProperty("name") + "."
+            + newline
+            + "  Text length = " + doc.getLength() + newline);
+          
+      }
+  }
+	
+	
+	
+	
+	
   private class commandButton implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == copier) {
