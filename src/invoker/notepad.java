@@ -92,13 +92,4 @@ public class notepad extends JFrame implements Observer{
 		textArea.setText(contenu);
   }
   
-	/*public static void main(String[] args) {
-		Editeur e = new Editeur();
-		EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            	notepad note = new notepad(e);
-                note.setVisible(true);
-            }
-        });
-	}*/
 }
