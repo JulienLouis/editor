@@ -22,11 +22,10 @@ public class Editeur {
 		return mei;
 	}
 	
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		Editeur editeur = new Editeur();
 		Observer notepad = editeur.notepad;
-		
-		////editeur.getMei().register(notepad); ????
+		editeur.getMei().attach(notepad);
 	}
 	
 	

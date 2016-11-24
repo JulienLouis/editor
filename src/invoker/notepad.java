@@ -4,11 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
 
 import receiver.java.model.MoteurEditionImplementation;
 import command.*;
@@ -97,7 +92,7 @@ public class notepad extends JFrame implements Observer{
 		textArea.setText(contenu);
   }
   
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Editeur e = new Editeur();
 		EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -105,5 +100,5 @@ public class notepad extends JFrame implements Observer{
                 note.setVisible(true);
             }
         });
-	}
+	}*/
 }

@@ -1,9 +1,13 @@
 package receiver.java.model;
 import static org.junit.Assert.*;
+import invoker.Observer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.HashSet;
+
 import receiver.java.model.*;
 
 /**
@@ -12,9 +16,8 @@ import receiver.java.model.*;
  * @generated
  */
 
-public class MoteurEditionImplementation implements MoteurImplementation
-{
-	
+public class MoteurEditionImplementation implements MoteurImplementation, Subject {
+	private List<Observer> observers = new ArrayList<Observer>();
 	public Selection select = new Selection();
 	public Buffer buf = new Buffer();
 	public PressePapier pp = new PressePapier();
@@ -129,6 +132,23 @@ public class MoteurEditionImplementation implements MoteurImplementation
 		int d = select.getDebut();
 		int f = select.getFin();//Determine la selection supprimï¿½e
 		buf.zone_texte.delete(d, f);
+	}
+	
+	
+	//Méthode de Subject
+	 public void attach(Observer observer){
+	      observers.add(observer);		
+	   }
+	   
+	   public void remove(Observer o) {
+			int observerIndex = observers.indexOf(o);
+			observers.remove(observerIndex);
+	   }
+
+	   public void notifyObserver() {
+			for (Observer o : observers) {
+				o.update(buf.zone_texte.toString());
+			}
 	}
 
 	/**
