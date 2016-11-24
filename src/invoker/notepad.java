@@ -93,14 +93,22 @@ public class notepad extends JFrame implements Observer{
       public void updateLog(DocumentEvent e, String action) {
           Document doc = (Document)e.getDocument();
           int changeLength = e.getLength();
+         
+	      //le contenue de textArea
+          System.out.println(textArea.getText());
           
+        
+          
+          //Les informations sur le contenue de textArea
+          /*  
           System.out.println(
               changeLength + " character"
             + ((changeLength == 1) ? " " : "s ")
             + action + " " + doc.getProperty("name") + "."
             + newline
             + "  Text length = " + doc.getLength() + newline);
-          
+         */
+	            
       }
   }
 	
