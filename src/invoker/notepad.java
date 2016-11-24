@@ -112,7 +112,49 @@ public class notepad extends JFrame implements Observer{
       }
   }
 	
-	
+	//This listens for and reports caret movements.
+ private class CaretListenerLabel extends JTextArea implements CaretListener {
+    
+	 
+     //Might not be invoked from the event dispatch thread.
+     public void caretUpdate(CaretEvent e) {
+         displaySelectionInfo(e.getDot(), e.getMark());
+     }
+
+     //This method can be invoked from any thread.  It 
+     //invokes the setText and modelToView methods, which 
+     //must run on the event dispatch thread. We use
+     //invokeLater to schedule the code for execution
+     //on the event dispatch thread.
+     public void displaySelectionInfo(final int dot,
+                                         final int mark) {
+         SwingUtilities.invokeLater(new Runnable() {
+        	 final String newline = "\n";
+        	 public void run() {
+                 if (dot == mark) {  // no selection
+                     try {
+                         Rectangle caretCoords =  textArea.modelToView(dot);   
+                         //Convert it to view coordinates.
+                         
+                         System.out.println("caret: text position: " + dot
+                                 + ", view location = ["
+                                 + caretCoords.x + ", "
+                                 + caretCoords.y + "]"
+                                 + newline);
+                     } catch (BadLocationException ble) {
+                    	 System.out.println("caret: text position: " + dot + newline);
+                     }
+                 } else if (dot < mark) {
+                	 System.out.println("selection from: " + dot
+                             + " to " + mark + newline);
+                 } else {
+                	 System.out.println("selection from: " + mark
+                             + " to " + dot + newline);
+                 }
+             }
+         });
+     }
+ }
 	
 	
 	
