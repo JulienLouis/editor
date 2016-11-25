@@ -1,16 +1,16 @@
 package command;
+import client.Editeur;
 import receiver.java.model.MoteurEditionImplementation;
 
 public class coller implements command{
 	
-	private MoteurEditionImplementation moteurEI;
+	private Editeur editeur;
 
-	   public coller(MoteurEditionImplementation moteur){
-	      this.moteurEI = moteur;
-	   }
+	public coller(Editeur e){
+		editeur = e;
+	}
 
-	   public void execute() {
-	      moteurEI.coller();
-	   }
-
+	public void execute() {
+		editeur.getMei().coller();
+	}
 }

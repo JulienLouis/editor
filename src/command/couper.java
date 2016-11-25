@@ -1,16 +1,17 @@
 package command;
+import client.Editeur;
 import receiver.java.model.MoteurEditionImplementation;
 
 public class couper implements command{
 	
-	private MoteurEditionImplementation moteurEI;
+	private Editeur editeur;
 
-	   public couper(MoteurEditionImplementation moteur){
-	      this.moteurEI = moteur;
+	   public couper(Editeur e){
+	      editeur = e;
 	   }
 
 	   public void execute() {
-	      moteurEI.couper();
+	      editeur.getMei().couper();
 	   }
 
 }

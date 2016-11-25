@@ -38,6 +38,8 @@ public class Selection
 	 * @ordered
 	 */
 	
+	private String contenuSelection;
+	
 	public Set<MoteurEditionImplementation> moteurEditionImplementation;
 
 	/**
@@ -63,6 +65,14 @@ public class Selection
 	
 	public void setFin(int f){
 		fin = f;
+	}
+	
+	public String getSelection(){
+		return contenuSelection;
+	}
+	
+	public void setSelection(String s){
+		contenuSelection = s;
 	}
 	
 	/*public void defBornes(int d, int f){

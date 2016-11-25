@@ -7,6 +7,7 @@ import java.util.HashMap;
 /**
  * Created by Louis on 17/11/2016.
  */
+/*
 public class client {
 
 
@@ -27,4 +28,4 @@ public class client {
         list.put("supprimer_texte",supprimer);
     }
 
-}
+}*/

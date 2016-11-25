@@ -1,16 +1,17 @@
 package command;
+import client.Editeur;
 import receiver.java.model.MoteurEditionImplementation;
 
 public class copier implements command{
 	
-	private MoteurEditionImplementation moteurEI;
+	private Editeur editeur;
 
-	   public copier(MoteurEditionImplementation moteur){
-	      this.moteurEI = moteur;
-	   }
+	public copier(Editeur e){
+		editeur = e;
+	}
 
-	   public void execute() {
-	      moteurEI.copier();
-	   }
+	public void execute() {
+		editeur.getMei().copier();
+	}
 
 }

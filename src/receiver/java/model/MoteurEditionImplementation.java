@@ -60,6 +60,7 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 		for (int i = d; i < f; i++){		//ajoute le contenu de la selection dans le presse papier
 			pp.contenu_presse_papier = pp.contenu_presse_papier + buf.zone_texte.charAt(i);
 		}	
+		System.out.println(pp.contenu_presse_papier);
 	}
 
 	/**
@@ -111,8 +112,13 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 	 */
 	
 	public void selectionner(int d, int f){
-		select.setDebut(d);
-		select.setFin(f);
+		System.out.println("le début"+ d+ "la fin " + f +" la selection dans mei");
+		//if (buf.zone_texte.length() >= f) {
+			String stringSelectionnee = buf.zone_texte.substring(d, f);
+			select.setSelection(stringSelectionnee);
+			select.setDebut(d);
+			select.setFin(f);
+//}
 	}
 
 	/**
