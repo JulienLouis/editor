@@ -35,7 +35,7 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 		int d = select.getDebut();
 		int f = select.getFin();
 		//select.defBornes(d,f);		//Permet de connaitre les bornes de la selection
-		if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionn�
+		if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionnï¿½
 			pp.contenu_presse_papier = "";
 		}
 		for (int i = d; i < f; i++){		//ajoute le contenu de la selection dans le presse papier
@@ -54,7 +54,7 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 	public void copier(){
 		int d = select.getDebut();
 		int f = select.getFin();
-		if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionn�
+		if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionnï¿½
 			pp.contenu_presse_papier = "";
 		}
 		for (int i = d; i < f; i++){		//ajoute le contenu de la selection dans le presse papier
@@ -112,13 +112,22 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 	 */
 	
 	public void selectionner(int d, int f){
-		System.out.println("le d�but"+ d+ "la fin " + f +" la selection dans mei");
-		//if (buf.zone_texte.length() >= f) {
+		String newline = "\n";
+		
+		if(f ==d){ //No selection
+			System.out.println("Il n'y a pas de selection" + newline);
+		}
+		else if(d < f){
+			System.out.println("Selection de "+ d + " jusqu'a " + f + newline);
+		}
+		else{
+			System.out.println("Selection de "+ f + " jusqu'a " + d + newline);
+		}
+		
 			String stringSelectionnee = buf.zone_texte.substring(d, f);
 			select.setSelection(stringSelectionnee);
 			select.setDebut(d);
 			select.setFin(f);
-//}
 	}
 
 	/**
@@ -136,12 +145,12 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 	
 	public void supprimer_texte(){
 		int d = select.getDebut();
-		int f = select.getFin();//Determine la selection supprim�e
+		int f = select.getFin();//Determine la selection supprimï¿½e
 		buf.zone_texte.delete(d, f);
 	}
 	
 	
-	//M�thode de Subject
+	//Méthode de Subject
 	 public void attach(Observer observer){
 	      observers.add(observer);		
 	   }
