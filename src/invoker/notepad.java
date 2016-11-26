@@ -1,18 +1,21 @@
 package invoker;
-import javax.swing.*
-;import javax.swing.event.CaretEvent;
+import javax.swing.*;
+import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;import java.awt.*;
+import javax.swing.text.Document;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
+
+import receiver.java.model.Buffer;
 import receiver.java.model.MoteurEditionImplementation;
 import command.*;
 import client.Editeur;
+
 
 public class notepad extends JFrame implements Observer{   
 	
@@ -30,7 +33,7 @@ public class notepad extends JFrame implements Observer{
 	private JButton copier;
 	private JButton couper;
 	private JButton coller;
-	private JButton selection;
+  //private JButton selection;
 	private JTextArea textArea;
 	
 	//Int debut fin de la selection
@@ -78,12 +81,14 @@ public class notepad extends JFrame implements Observer{
 		Font f = new Font("Times New Roman", Font.PLAIN, 18);
 		textArea.setFont(f);
 		mainPanel.add(textArea, BorderLayout.CENTER);
-	 //   textArea.getDocument().addDocumentListener(new MyDocumentListener());
-	 //   textArea.getDocument().putProperty("name", "Text Area");
+		textArea.getDocument().addDocumentListener(new MyDocumentListener());
+	    textArea.getDocument().putProperty("name", "Text Area");
 		
 		//ajout des listener
 		commandButton cb = new commandButton();
 		commandSelection cS = new commandSelection();
+	//	commandInserer cI = new commandInserer();
+	//	textArea.addKeyListener(cI);
 		textArea.addCaretListener(cS);
 		copier.addActionListener(cb);
 		coller.addActionListener(cb);
@@ -92,7 +97,7 @@ public class notepad extends JFrame implements Observer{
 		this.setVisible(true);
 	  
   }
-  /*
+  
   	private class MyDocumentListener implements DocumentListener {
   		
 	    final String newline = "\n";
@@ -104,6 +109,13 @@ public class notepad extends JFrame implements Observer{
 	    public void removeUpdate(DocumentEvent e) {
 	    	
 	    	updateLog(e, "removed from");
+	    	try{
+			
+				supprimerC.execute();
+			}
+			catch(RuntimeException r){
+						
+			}	
 	    	
 	      
 	    }
@@ -116,7 +128,8 @@ public class notepad extends JFrame implements Observer{
 	        int changeLength = e.getLength();
 	       
 		    //le contenue de textArea
-	          System.out.println(textArea.getText());	          
+	       
+	        System.out.println(textArea.getText());	          
 	          //Les informations sur le contenue de textArea
 	           
 	          System.out.println(
@@ -129,7 +142,7 @@ public class notepad extends JFrame implements Observer{
 		            
       }
   }
-  	*/
+  	
 	/*
 	//This listens for and reports caret movements.
   	private class CaretListenerLabel extends JTextArea implements CaretListener {	 
@@ -177,17 +190,23 @@ public class notepad extends JFrame implements Observer{
   		return debutfin;
   	}
 	
-  	//Permet de rÃ©cupÃ©rer les entier de la selection et de lancer la command selectionC
-  	private class commandSaisie implements KeyListener{
+  	//Permet de récupérer les entier de la selection et de lancer la command selectionC
+  	
+  	/*
+  	private class commandInserer implements KeyListener{
 
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if (!e.isActionKey()) {
 				if ((int) e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
 					supprimerC.execute();
-				} else if ((int) e.getKeyChar() == KeyEvent.VK_DELETE) {
+				
+				} 
+				 else if ((int) e.getKeyChar() == KeyEvent.VK_DELETE) {
 					e.consume();
+				
 				}
+				
 				}
 		}
 
@@ -200,41 +219,51 @@ public class notepad extends JFrame implements Observer{
 		public void keyTyped(KeyEvent e) {
 			if ((int) e.getKeyChar() != KeyEvent.VK_BACK_SPACE 
 					&& (int) e.getKeyChar() != KeyEvent.VK_DELETE) {
-				newChar = e.getKeyChar();
+			//	newChar = e.getKeyChar();
 			//	inserer_texte.execute();
-			}
-			
+			}	
 		}
-  		
   	}
+  	
+  	*/
   	
   	private class commandSelection implements CaretListener {
 		public void caretUpdate(CaretEvent e) {
 		    String newline = "\n";
 			int newDebut = Math.min(e.getDot(), e.getMark());
 			int newFin = Math.max(e.getDot(), e.getMark());
-			  if (newDebut == newFin) {  // no selection
+			 
+			if (newDebut == newFin) {  // no selection
+				  
                   try {
                       Rectangle caretCoords = textArea.modelToView(newDebut);
                       //Convert it to view coordinates.
                       System.out.println("Position du texte: " + newDebut
-                              + ", Les coordonnÃ©es de l'emplacement = ["
+                              + ", Les coordonnées de l'emplacement = ["
                               + caretCoords.x + ", "
                               + caretCoords.y + "]"
                               + newline);
                   } catch (BadLocationException ble) {
                 	  System.out.println("Position du texte : " + newDebut + newline);
                   }
-              } 	
-			
-			if (newDebut != debutfin[0] || newFin != debutfin[1]) {
-				debutfin[0] = newDebut;
-				debutfin[1] = newFin;
-			//	selectionC.execute();
+              }
+			  
+			if (newDebut != newFin) {
+
+					try{
+						debutfin[0] = newDebut;
+						debutfin[1] = newFin;
+						selectionC.execute();
+					}
+					catch(RuntimeException r){
+								
+					}	
+				
 				}
 			}
 	}
 	
+
   	//Lance les command collerC copierC et couperC
 	private class commandButton implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -248,9 +277,7 @@ public class notepad extends JFrame implements Observer{
 					collerC.execute();
 			}
 	  }
-	  
-	    
-		  
+	  	  
 	  public void update(String contenu) {
 			textArea.setText(contenu);
 	  }
