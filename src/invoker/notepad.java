@@ -20,6 +20,7 @@ import client.Editeur;
 public class notepad extends JFrame implements Observer{   
 	
 	private Editeur e;
+	private MoteurEditionImplementation mei;
 	
 	//command
 	private command copierC;
@@ -46,6 +47,7 @@ public class notepad extends JFrame implements Observer{
 		collerC = new coller(editeur);
 		selectionC = new Selectionner(editeur, this);
 		supprimerC = new supprimer_texte(editeur);
+		insererC = new inserer_texte(mei);
 		
 	  
 	  	e = editeur;
@@ -104,6 +106,14 @@ public class notepad extends JFrame implements Observer{
 	
 	    public void insertUpdate(DocumentEvent e) {
 	        updateLog(e, "inserted into");
+	        
+	        try{
+				
+	        	insererC.execute();
+			}
+			catch(RuntimeException r){
+						
+			}	
 	     
 	    }
 	    public void removeUpdate(DocumentEvent e) {
