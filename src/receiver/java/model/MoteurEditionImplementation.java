@@ -54,14 +54,20 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 	public void copier(){
 		int d = select.getDebut();
 		int f = select.getFin();
-		if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionnï¿½
-			pp.contenu_presse_papier = "";
-		}
-		for (int i = d; i < f; i++){		//ajoute le contenu de la selection dans le presse papier
-			pp.contenu_presse_papier = pp.contenu_presse_papier + buf.zone_texte.charAt(i);
-		}	
+			if (d != f){	//Permet de ne pas supprimer le pp si rien n'est selectionnï¿½
+				pp.contenu_presse_papier = "";
+				
+			}
+			for (int i = d; i < f; i++){		//ajoute le contenu de la selection dans le presse papier
+				pp.contenu_presse_papier = pp.contenu_presse_papier + select.getSelection().charAt(i);
+			}	
+	
 		System.out.println(pp.contenu_presse_papier);
+		System.out.println("test");
 	}
+	
+		
+	
 
 	/**
 	 * <!-- begin-user-doc -->
