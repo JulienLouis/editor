@@ -44,5 +44,10 @@ public class Buffer {
 	public StringBuffer getTexte() {
 		return zone_texte;
 	}
+	
+	public void insert(int start, int end, String string) {
+		zone_texte.delete(start, end);
+		zone_texte.insert(start, string); 
+}
 
 }

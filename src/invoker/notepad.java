@@ -47,7 +47,7 @@ public class notepad extends JFrame implements Observer{
 	  
 	  	copierC = new copier(editeur);
 		couperC = new couper(editeur,this);
-		collerC = new coller(editeur);
+		collerC = new coller(editeur, this);
 		selectionC = new Selectionner(editeur, this);
 		supprimerC = new supprimer_texte(editeur,this);
 		insererC = new inserer_texte(editeur,this);
