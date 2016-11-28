@@ -2,16 +2,16 @@ package command;
 
 import client.Editeur;
 
-public class Copier implements Command {
+public class Couper implements Command {
 	
 	private Editeur editeur;
 	
-	public Copier(Editeur newEditeur) {
+	public Couper(Editeur newEditeur) {
 		editeur = newEditeur;
 	}
 	
 	public void execute() {
-		editeur.getMoteur().copier();
+		editeur.getMoteur().couper();
 	}
 	
 }
