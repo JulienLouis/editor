@@ -16,6 +16,6 @@ public class coller implements command{
 
 	public void execute() {
 		editeur.getMei().coller();
-		notepad.update(editeur.getMei().buf.getTexte().toString());
+		//notepad.update(editeur.getMei().buf.getTexte().toString());
 	}
 }

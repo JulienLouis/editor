@@ -15,7 +15,7 @@ public class couper implements command{
 
 	   public void execute() {
 	      editeur.getMei().couper();
-	      notepad.update(editeur.getMei().buf.getTexte().toString());
+	     // notepad.update(editeur.getMei().buf.getTexte().toString());
 	   }
 
 }

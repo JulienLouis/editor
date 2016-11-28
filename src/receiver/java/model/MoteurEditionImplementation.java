@@ -46,6 +46,7 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 			pp.setPP(content);			
 		}*/
 		supprimer_texte();
+		notifyObserver();
 		System.out.println("couper "+pp.getPP());
 	}
 
@@ -57,6 +58,9 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 	 */
 	
 	public void copier(){
+		System.out.println(select.getDebut());
+		System.out.println(select.getFin());
+		System.out.println(select.getSelection());
 		pp.setPP(select.getSelection());
 	/*	int d = select.getDebut();
 		int f = select.getFin();
@@ -87,11 +91,14 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 	
 	public void coller() {
 		System.out.println("coller : " + pp.getPP());
+		System.out.println(select.getDebut());
+		System.out.println(select.getFin());
+		System.out.println(select.getSelection());
 		int d = select.getDebut();
 		int f = select.getFin();//Determine ou est coller la selection
 		buf.insert(d, f, pp.getPP());	//colle la selection entre les bornes de la selection
 		System.out.println("Buffer : "+buf.getTexte());
-	
+		notifyObserver();
 	}
 	
 
@@ -134,11 +141,13 @@ public class MoteurEditionImplementation implements MoteurImplementation, Subjec
 		
 			//System.out.println("Selection de "+ f + " jusqu'a " + d + newline);
 			//System.out.println("d = "+d+" f = "+f);
-			//System.out.println(buf.zone_texte);
-			String stringSelectionnee = buf.zone_texte.substring(d, f);
-			select.setSelection(stringSelectionnee);
+			System.out.println("buffer "+buf.getTexte());
+			System.out.println("on sélectionne au "+ d +" "+ f);
 			select.setDebut(d);
 			select.setFin(f);
+			String stringSelectionnee = buf.zone_texte.substring(d, f);
+			select.setSelection(stringSelectionnee);
+			
 		
 		
 			

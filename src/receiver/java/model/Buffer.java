@@ -48,6 +48,8 @@ public class Buffer {
 	public void insert(int start, int end, String string) {
 		zone_texte.delete(start, end);
 		zone_texte.insert(start, string); 
+		
+		//zone_texte.replace(start, end, string);
 }
 
 }
