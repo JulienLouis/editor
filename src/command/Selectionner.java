@@ -16,7 +16,7 @@ public class Selectionner implements command{
 	
 	public void execute() { 
 		int[] debutFin = notepad.getSelectionDebutFin();
-		System.out.println(debutFin+" la selection dans command");
+		// System.out.println(debutFin+" la selection dans command");
 		editeur.getMei().selectionner(debutFin[0], debutFin[1]);
 	}
 

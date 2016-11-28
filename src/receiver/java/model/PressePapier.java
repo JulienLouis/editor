@@ -18,7 +18,7 @@ public class PressePapier
 	 * @ordered
 	 */
 	
-	public String contenu_presse_papier;
+	private String contenu_presse_papier;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -28,6 +28,14 @@ public class PressePapier
 	 */
 	
 	public Set<MoteurEditionImplementation> moteurEditionImplementation;
+	
+	public void setPP(String newPP){
+		contenu_presse_papier = newPP;
+	}
+	
+	public String getPP(){
+		return contenu_presse_papier;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

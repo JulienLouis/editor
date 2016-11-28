@@ -1,16 +1,20 @@
 package command;
 import receiver.java.model.MoteurEditionImplementation;
+import client.Editeur;
+import invoker.notepad;
 
 public class inserer_texte implements command{
 	
-	private MoteurEditionImplementation moteurEI;
+	private Editeur editeur;
+	private notepad notepad;
 
-	   public inserer_texte(MoteurEditionImplementation moteur){
-	      this.moteurEI = moteur;
+	   public inserer_texte(Editeur e, notepad n){
+	      editeur = e;
+	      notepad = n;
 	   }
 
 	   public void execute() {
-	      moteurEI.inserer_texte("kjfnvjnb");
+	      editeur.getMei().inserer_texte(notepad.getContentTextField());
 	   }
 
 }
