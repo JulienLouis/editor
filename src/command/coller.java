@@ -1,21 +1,17 @@
 package command;
-import invoker.notepad;
-import client.Editeur;
-import receiver.java.model.MoteurEditionImplementation;
 
-public class coller implements command{
+import client.Editeur;
+
+public class Coller implements Command {
 	
 	private Editeur editeur;
-	private notepad notepad;
-
-
-	public coller(Editeur e, notepad n){
-		editeur = e;
-		notepad = n;
+	
+	public Coller(Editeur newEditeur) {
+		editeur = newEditeur;
 	}
-
+	
 	public void execute() {
-		editeur.getMei().coller();
-		//notepad.update(editeur.getMei().buf.getTexte().toString());
+		editeur.getMoteur().coller();
 	}
+	
 }

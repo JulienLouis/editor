@@ -1,32 +1,51 @@
 package client;
 
-import receiver.java.model.*;
-import command.*;
-import invoker.*;
+import invoker.Ihm;
+import invoker.Observer;
+import receiver.MoteurEdition;
+import receiver.MoteurEditionImpl;
 
+/**
+* La classe Editeur permet de lancer l'editeur de texte.
+*
+* @author  Emre Talay & Julien Louis
+* @version 1.0
+* @since   2016-11-07
+*/
 public class Editeur {
 	
-	private MoteurEditionImplementation mei = new MoteurEditionImplementation();
+	/**
+	 * Moteur possedant les fonctions d'edition
+	 */
+	private MoteurEdition moteur = new MoteurEditionImpl();
 	
-	private Observer notepad;
+	/**
+	 * Interface Homme Machine
+	 */
+	private Observer ihm;
 	
+	/**
+	 * Constructeur de a classe 
+	 * {@link Editeur#moteur}
+	 * {@link Editeur#ihm}
+	 */
 	public Editeur() {
-		mei = new MoteurEditionImplementation();
-		notepad = new notepad(this);
+		moteur = new MoteurEditionImpl();
+		ihm = new Ihm(this);
 	}
 	
 	/**
 	 * {@link Editeur#moteur}
 	 */
-	public MoteurEditionImplementation getMei() {
-		return mei;
+	public MoteurEdition getMoteur() {
+		return moteur;
 	}
 	
 	public static void main(String[] args) {
 		Editeur editeur = new Editeur();
-		Observer notepad = editeur.notepad;
-		editeur.getMei().attach(notepad);
+		Observer ihm = editeur.ihm;
+		
+		editeur.getMoteur().register(ihm);
 	}
-	
-	
+
 }

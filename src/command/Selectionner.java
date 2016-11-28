@@ -1,23 +1,21 @@
 package command;
 
 import client.Editeur;
-import invoker.notepad;
+import invoker.Ihm;
 
-
-public class Selectionner implements command{
+public class Selectionner implements Command {
 	
 	private Editeur editeur;
-	private notepad notepad;
+	private Ihm ihm;
 	
-	public Selectionner(Editeur newEditeur,  notepad newNotepad) {
+	public Selectionner(Editeur newEditeur, Ihm newIhm) {
 		editeur = newEditeur;
-		notepad = newNotepad;
+		ihm = newIhm;
 	}
 	
 	public void execute() { 
-		int[] debutFin = notepad.getSelectionDebutFin();
-		// System.out.println(debutFin+" la selection dans command");
-		editeur.getMei().selectionner(debutFin[0], debutFin[1]);
+		int[] debutFin = ihm.getSelection();
+		editeur.getMoteur().selectionner(debutFin[0], debutFin[1]);
 	}
-
+	
 }

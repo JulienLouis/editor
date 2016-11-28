@@ -2,16 +2,16 @@ package command;
 
 import client.Editeur;
 
-public class Copier implements Command {
+public class Supprimer implements Command {
 	
 	private Editeur editeur;
 	
-	public Copier(Editeur newEditeur) {
+	public Supprimer(Editeur newEditeur) {
 		editeur = newEditeur;
 	}
-	
+
 	public void execute() {
-		editeur.getMoteur().copier();
+		editeur.getMoteur().supprimer();
 	}
 	
 }
